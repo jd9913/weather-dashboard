@@ -1,63 +1,57 @@
-/*Open Weather API URL: https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&
-exclude = { part } & appid={YOUR API KEY}*/
-//Open Weather API Key:ca33c4ea10ee4b2a98d215600200209
-
-let geoOptions = {
-    enableHighAccuracy: true,
-    timeout: 3000,
-    maximumAge: 0,
-}
+//Open Weather API URL: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
 
 
-const apiKey = "ca33c4ea10ee4b2a98d215600200209";
+const apiKey = "f8b4e4e676da7a6f6b5d39dca6a31195";
+const apiBaseURL ="https://api.openweathermap.org/data/2.5/weather?q="
+
+const searchBoxEl = document.querySelector('#search-box');
+const searchFormEl = document.querySelector('#search-form');
+const cityNameEl = document.querySelector('#location');
 
 
-class Weather {
-    constructor(city, state) {
-        this.apiKey,
-            this.city,
-            this.state
-     };
-
-    //get weather data from API
-
-    async getWeather() {
-        const response = fetch(`http://api.weatherapi.com/v1/current.json?key=ca33c4ea10ee4b2a98d215600200209&q=${this.city}&${this.state} `)
-            .then((response) => {
-                return responseData.coord.lon;
-                return responseData.coord.lat;
-                return responseData.weather.main;
-                return responseData.wind;
-                return responseData.weather.icon;
-                console.log(responseData);
-            })
-
-            .catch((err) => {
-                console.log('unable to complete request');
-            })
 
 
+
+//api call for getting weather data
+let getWeatherData = function () {
+
+    let cityName = cityNameEl.value.trim();
+
+    let apiURL = apiBaseURL + cityName + '&appid=' + apiKey;
+    console.log(apiURL);
+
+    fetch(apiURL).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+
+                console.log(cityName);
+            });
+        } else {
+            alert("Error: " + response.statusText);
+        }
+    });
+
+
+};
+
+$('#search-btn').on('click', function () {
+    event.preventDefault();
+    searchFormSubmit();
+});
+
+
+let searchFormSubmit = function (event) {
+
+   let cityName = cityNameEl.value.trim();
+
+    if (cityName) {
+        getWeatherData(cityName);
+
+    } else {
+        alert("Please enter the name of a city");
+        return;
     }
-
-
-
-
-
-    //change weather location
-    changeLocation(city, state) {
-        this.city = city;
-        this.state = state;
-
-
-    }
-
-}
-
-
-
-
-
-
+};
 
 
 
