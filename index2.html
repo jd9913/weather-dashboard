@@ -19,7 +19,7 @@
 
     <!--search area-->
     <main class="row mr-2 ml-2">
-        <section  class="col-md-3 bg-light mt-3">
+        <section class="col-md-3 bg-light mt-3">
 
             <form id="search-form" class="pl-3">
                 <div>
@@ -43,17 +43,15 @@
             <div id="w-current" class="border border-info rounded">
                 <div class="container">
                     <div class="row">
-                        <h1 id="w-city"></h1>
+                        <h1><span id="w-city"></span></h1>
                         <img id="w-icon" src="" alt="current weather icon" />
                     </div>
-                    <ul>
-                        <li id="w-temp"></li>
-                        <li id="w-humidity"></li>
-                        <li id="w-wind"></li>
+                    <ul class="list-group" id="w-currentData">
+                        <li class="list-group-item" id="w-temp"></li>
+                        <li class="list-group-item" id="w-humidity"></li>
+                        <li class="list-group-item" id="w-wind"></li>
+                        <li class="list-group-item rounded" id="w-uv"></li>
                     </ul>
-                    <div>
-                        <p id="w-uv" class="rounded"></p>
-                    </div>
                 </div>
             </div>
 
