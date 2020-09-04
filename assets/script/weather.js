@@ -72,6 +72,11 @@ let getWeatherData = function (cityName) {
             alert('unable to connect to API service');
         });
 
+
+
+
+
+
 };
 
 
@@ -84,7 +89,7 @@ let displayWeather = function (data, cityName) {
 
     writeCityEl.innerHTML = cityName;
 
-    console.log(data);
+   // console.log(data);
 
     cityName = data.name;
 
@@ -99,31 +104,6 @@ let displayWeather = function (data, cityName) {
     writeWindEl.innerHTML = ('Current Wind Speed: ' + data.wind.speed + 'MPH');
 
 
-    const latitude = data.coord.lat;
-    const longitude = data.coord.lon;
-
-
-    const dataUV = (baseUVData+'lat='+latitude+'&lon='+longitude+'&exclude=minutely,hourly,daily&appid='+apiKey);
-
-    fetch(dataUV)
-        .then(function (response) {
-
-            if (response.ok) {
-                //console.log(response);
-
-                response.json().then(function (dataUV) {
-
-                    console.log(dataUV);
-
-                    writeUVIndexEl.innerHTML = dataUV.current.uvi;
-                });
-            } else {
-                alert("Error: " + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            alert('unable to connect to API service');
-        });
 
 
 
