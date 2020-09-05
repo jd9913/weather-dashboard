@@ -1,4 +1,9 @@
 {
-  "ExpandedNodes": [],
+  "ExpandedNodes": [
+    "",
+    "\\assets",
+    "\\assets\\script"
+  ],
+  "SelectedNode": "\\assets\\script\\weather.js",
   "PreviewInSolutionExplorer": false
 }
