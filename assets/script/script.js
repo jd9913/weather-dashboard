@@ -27,11 +27,11 @@ let cityName = cityNameEl.value;
 
 //forecast cards display elements
 const initCard = document.querySelector('#w-forecast-cards');
-const fDateEl = document.querySelector('#f-date');
+/*const fDateEl = document.querySelector('#f-date');
 const fIconEl = document.querySelector('#f-icon');
 const fTempMinEl = document.querySelector('#f-tempMin');
 const fTempMaxEl = document.querySelector('#f-tempMax');
-const fhumidEl = document.querySelector('#f-humidity');
+const fhumidEl = document.querySelector('#f-humidity');*/
 
 
 
@@ -116,9 +116,10 @@ let getWeatherData = function (cityName) {
 
 
                 let unixDate = response.daily[i].dt;
+                let fDate = moment.unix(unixDate).format("MM/DD/YYYY");
 
 
-                forecastCards(response, unixDate);
+                displayForecast(response, fDate);
 
             }
 
@@ -176,65 +177,71 @@ let colorUvi = function (response) {
 
 //create the cards to hold the forecast data
 
-function createCard() {
-
-    let tempNode = document.createTextNode("")
-
-    const fCard = document.createElement('div');
-    fCard.newClass = ("card");
-    initCard.appendChild(fCard);
-
-    const fCardBody = document.createElement('div');
-    fCardBody.newClass = ("card-body");
-    fCard.appendChild(fCardBody);
-
-    const fCardTitle = document.createElement('div');
-    fCardTitle.newClass = ("card-title");
-    fCardTitle.appendChild(tempNode);
-    fCardBody.appendChild(fCardTitle);
-
-    const fCardSubTitle = document.createElement('div');
-    fCardSubTitle.newClass = ("card-subtitle mb-2 text-muted");
-    fCardSubTitle.appendChild(tempNode);
-    fCardBody.appendChild(fCardTitle);
-
-    const fCardText = document.createElement('div');
-    fCardText.newClass = ('card-text');
-    fCardBody.appendChild(fCardText);
-
-    const fCardList = document.createElement('ul');
-    fCardList.newClass = ('list-group');
-    fCardText.appendChild(fCardList);
 
 
-    for (i = 0; i < 3; i++) {
+function displayForecast(response, fDate) {
 
-        const fCardItem = document.createElement('li');
-        fCardItem.newClass = ('list-group-item');
-        fCardItem.appendChild(tempNode);
-        fCardList.appendChild(fCardItem);
+    for (i = 1; i < 6; i++) {
+
+       // debugger;
+
+        console.log(response);
+        console.log(fDate);
+
+
+       let forecastDate=moment(fDate).add((i), 'd').format('M/D/YYYY')
+
+
+        //get weather data
+        let iconCode = response.daily[i].weather[0].icon;
+        console.log(iconCode);
+        let fIcon = iconURLBase + iconCode + ".png";
+
+        console.log(fIcon);
+        let ftempMin = response.daily[i].temp.day;
+        let ftempMax = response.daily[i].temp.max;
+        let fhumidity = response.daily[i].humidity;
+        console.log('min= ' + ftempMin, 'max= ' + ftempMax, 'hum= ' + fhumidity)
+
+
+        //create card
+
+        let fCard = $('<div>').attr('id', 'card' + i).attr('class', 'card border-dark mb-3');
+        $('#w-forecast-cards').append(fCard);
+
+        let fCardBody = $('<div>').attr('class', 'card-body');
+        fCard.append(fCardBody);
+
+        let cardTitle = $('<h5>').attr('class', 'card-title').text(forecastDate);
+        fCardBody.append(cardTitle);
+
+        let iconImage = $('<img>').attr('src', fIcon);
+        fCardBody.append(iconImage);
+
+        let fCardText = $('<div>').attr('class', 'card-text');
+        fCardBody.append(fCardText);
+
+        let fCardList = $('<ul>').attr('class', 'list-group');
+        fCardText.append(fCardList);
+
+        let lowTempItem = $('<li>').attr('class', 'list-group-item').text('Low: '+ ftempMin+'F');
+        fCardList.append(lowTempItem);
+
+        let highTempItem = $('<li>').attr('class', 'list-group-item').text('High: ' + ftempMax + 'F');
+        fCardList.append(highTempItem);
+
+        let fhumid = $('<li>').attr('class', 'list-group-item').text('Humidity: ' + fhumidity + '%');
+        fCardList.append(fhumid);
+
+
+
+
+
+
+
     }
 
-}
 
-createCard()
-
-let forecastCards = function (response, unixDate) {
-    console.log(response);
-    console.log(unixDate);
-    let iconCode = response.daily[i].weather[0].icon;
-    console.log(iconCode);
-    let fIcon = iconURLBase + iconCode + ".png";
-    console.log(fIcon);
-    let ftempMin = response.daily[i].temp.day;
-    let ftempMax = response.daily[i].temp.max;
-    let fhumidity = response.daily[i].humidity;
-    console.log('min= ' + ftempMin, 'max= ' + ftempMax, 'hum= ' + fhumidity)
-    fDateEl.innerHTML = moment.unix(unixDate).format("MM/DD/YYYY");
-    fIconEl.src = fIcon;
-    fTempMinEl.innerHTML = ('Low: ' + ftempMin+'F');
-    fTempMaxEl.innerHTML = ('High: ' + ftempMax+'F');
-    fhumidEl.innerHTML = ('Humidity: ' + fhumidity+'%');
 };
 
 

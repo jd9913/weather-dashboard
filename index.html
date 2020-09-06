@@ -4,24 +4,24 @@
 <head>
     <meta charset="utf-8" />
 
-    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" />
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <link rel="stylesheet" href="./assets/css/styles.css" />
 
-    <title>Weather Dashboard--lat/long</title>
+    <title>Weather Dashboard</title>
 </head>
 <body>
 
-    <header class="jumbotron text-center display-4 bg-primary text-white p-0">
+    <header class="jumbotron text-center display-4 bg-dark text-white p-0">
         Weather Dashboard
     </header>
 
     <!--search area-->
     <main class="row mr-2 ml-2">
-        <section class="col-md-3 bg-light mt-3">
+        <section class="col-md-3 border-dark mt-3">
 
             <form id="search-form" class="pl-3">
                 <div>
@@ -30,7 +30,7 @@
                     </label>
                 </div>
                 <div id="search-box" class="input-group mb-3">
-                    <input id="location" name="location" type="text" class="form-control" placeholder="location" aria-label="location" aria-describedby="search-button" />
+                    <input id="location" name="location" type="text" class="form-control btn btn-info" placeholder="location" aria-label="location" aria-describedby="search-button" />
                     <div class="input-group-append">
                         <button class="btn btn-info" id="search-btn" type="submit"><i class="fas fa-search"></i></button>
                     </div>
@@ -60,33 +60,7 @@
          <!--   Forecast weather cards-->
             <div id="w-forecast" class="container pt-3">
                 <h4 class="text-center">5-Day Forecast</h4>
-                <div id="w-forecast-cards" class="row">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" id="f-date"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><img src="" id="f-icon" /></h6>
-                            <div class="card-text">
-                                <ul class="list-group" id="f-Data">
-                                    <li class="list-group-item" id="f-tempMin"></li>
-                                    <li class="list-group-item" id="f-tempMax"></li>
-                                    <li class="list-group-item" id="f-humidity"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title" id="f-date2"></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><img src="" id="f-icon2" /></h6>
-                            <div class="card-text">
-                                <ul class="list-group" id="f-Data">
-                                    <li class="list-group-item" id="f-tempMin2"></li>
-                                    <li class="list-group-item" id="f-tempMax2"></li>
-                                    <li class="list-group-item" id="f-humidity2"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div id="w-forecast-cards" class="row p-1">
 
                 </div>
             </div>
