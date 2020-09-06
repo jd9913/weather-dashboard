@@ -11,3 +11,7 @@ https://github.com/jd9913/weather-dashboard
 
 # Live Website
 https://jd9913.github.io/weather-dashboard/
+
+# ScreenShot
+
+![Screenshot](./assets/images/screenshot.png)
