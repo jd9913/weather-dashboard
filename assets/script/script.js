@@ -232,9 +232,9 @@ let forecastCards = function (response, unixDate) {
     console.log('min= ' + ftempMin, 'max= ' + ftempMax, 'hum= ' + fhumidity)
     fDateEl.innerHTML = moment.unix(unixDate).format("MM/DD/YYYY");
     fIconEl.src = fIcon;
-    fTempMinEl.innerHTML = ('Minimum Forecast Temperature: ' + ftempMin);
-    fTempMaxEl.innerHTML = ('Maximum Forecast Temperature: ' + ftempMax);
-    fhumidEl.innerHTML = ('Expected Humidity: ' + fhumidity);
+    fTempMinEl.innerHTML = ('Low: ' + ftempMin+'F');
+    fTempMaxEl.innerHTML = ('High: ' + ftempMax+'F');
+    fhumidEl.innerHTML = ('Humidity: ' + fhumidity+'%');
 };
 
 
