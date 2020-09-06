@@ -29,3 +29,48 @@ textarea {
         padding: 0;
     }
 }
+
+.uvDefault{
+    background-color: none;
+    border-radius: .5em;
+    padding:.5em;
+}
+
+.uvGreen {
+    background-color: green;
+    border-radius: .5em;
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+}
+.uvYellow {
+    background-color: yellow;
+    border-radius: .5em;
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+}
+
+.uvOrange {
+    background-color: orange;
+    border-radius: .5em;
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+}
+
+.uvRed {
+    background-color: red;
+    border-radius: .5em;
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+}
+
+.uvViolet {
+    background-color: violet;
+    border-radius: .5em;
+    padding: .5em;
+    font-weight: bold;
+    color: black;
+}
