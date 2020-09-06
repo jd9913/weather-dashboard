@@ -93,11 +93,13 @@ let getWeatherData = function (cityName) {
 
                 displayWeather(response);
                 colorUvi(response);
+               let unixDate = data.dt;
 
-                //forecastCards(response);
+                forecastCards(response, unixDate);
             }
 
         })
+
 };
 
 
@@ -148,7 +150,30 @@ let colorUvi = function (response) {
 
 }
 
+let forecastCards = function (response) {
 
+    let i = 0;
+
+   let data = response.daily;
+
+
+
+    console.log(response);
+
+    let unixDate = data[i].dt[i];
+    let iconCode = data[i].weather[0].icon;
+    let fIcon = iconURLBase + iconCode + ".png";
+    let ftempMin = data[i].temp.day;
+    let ftempMax = data[i].temp.max;
+    let fhumidity = data[i].humidity;
+
+    $('#f-date').text = (unixDate[i]);
+    $('#f-icon').src = fIcon[i];
+    $('#f-tempMin').text = ('min temp: ' + ftempMin[i]);
+    $('f-tempMax').text = ('Max Temp: ' + ftempMax[i]);
+    $('f-humidity').text = ('Humidity: ' + fhumidity[i]);
+
+};
 
 
 
@@ -179,7 +204,7 @@ function createCard() {
 
 }
 
-createCard();
+
 
 
 /*for (let i = 0; i < 5; i++) {
