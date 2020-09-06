@@ -217,7 +217,7 @@ function createCard() {
 
 }
 
-
+createCard()
 
 let forecastCards = function (response, unixDate) {
     console.log(response);
