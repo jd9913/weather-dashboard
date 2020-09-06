@@ -1,12 +1,17 @@
-//Open Weather API URL: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
+
+//API Information
 const apiKey = "f8b4e4e676da7a6f6b5d39dca6a31195";
 const apiBaseURL = "https://api.openweathermap.org/data/2.5/weather?q="//for using city name as parameter
 const baseUVData = "https://api.openweathermap.org/data/2.5/onecall?";
-const iconURLBase = "http://openweathermap.org/img/wn/";
+const iconURLBase = "https://openweathermap.org/img/wn/";
 
+
+//search box elements
 const searchBoxEl = document.querySelector('#search-box');
 const searchFormEl = document.querySelector('#search-form');
 const cityNameEl = document.querySelector('#location');
+
+//current weather display elements
 const writeCityEl = document.querySelector('#w-city');//search-term
 const writeIconEl = document.querySelector('#w-icon');
 const writeForecastWxEl = document.querySelector('#w-forecast-cards');//container
@@ -16,10 +21,22 @@ const writeWindEl = document.querySelector('#w-wind');
 const writeCurrentWXEl = document.querySelector('#currentData');
 const writeUVIndexEl = document.querySelector("#w-uvi");
 const forecastDateEl = document.querySelector('#f-date');
-const initCard = document.querySelector('#w-forecast-cards');
-
 let cityName = cityNameEl.value;
 
+
+
+//forecast cards display elements
+const initCard = document.querySelector('#w-forecast-cards');
+const fDateEl = document.querySelector('#f-date');
+const fIconEl = document.querySelector('#f-icon');
+const fTempMinEl = document.querySelector('#f-tempMin');
+const fTempMaxEl = document.querySelector('#f-tempMax');
+const fhumidEl = document.querySelector('#f-humidity');
+
+
+
+
+let i = 0;
 
 
 
@@ -80,7 +97,8 @@ let getWeatherData = function (cityName) {
         .then(function (response) {
             return response.json();
 
-            console.log(response);
+
+
 
         })
         .then(function (response) {
@@ -91,11 +109,17 @@ let getWeatherData = function (cityName) {
             } else {
 
 
+
                 displayWeather(response);
                 colorUvi(response);
-               let unixDate = data.dt;
+
+
+
+                let unixDate = response.daily[i].dt;
+
 
                 forecastCards(response, unixDate);
+
             }
 
         })
@@ -105,16 +129,15 @@ let getWeatherData = function (cityName) {
 
 //display the current weather on the page
 
-let displayWeather = function (data) {
+let displayWeather = function (response) {
 
 
     //write current weather based on API results
-    writeTempEl.innerHTML = ('Current Temperature: ' + data.current.temp + 'F');
-    writeHumEl.innerHTML = ('Current Humidity: ' + data.current.humidity + '%');
-    writeWindEl.innerHTML = ('Current Wind Speed: ' + data.current.wind_speed + ' MPH');
+    writeTempEl.innerHTML = ('Current Temperature: ' + response.current.temp + 'F');
+    writeHumEl.innerHTML = ('Current Humidity: ' + response.current.humidity + '%');
+    writeWindEl.innerHTML = ('Current Wind Speed: ' + response.current.wind_speed + ' MPH');
 
-    writeUVIndexEl.innerHTML = data.current.uvi;
-
+    writeUVIndexEl.innerHTML = response.current.uvi;
 
 
 }
@@ -150,68 +173,70 @@ let colorUvi = function (response) {
 
 }
 
-let forecastCards = function (response) {
 
-    let i = 0;
-
-   let data = response.daily;
-
-
-
-    console.log(response);
-
-    let unixDate = data[i].dt[i];
-    let iconCode = data[i].weather[0].icon;
-    let fIcon = iconURLBase + iconCode + ".png";
-    let ftempMin = data[i].temp.day;
-    let ftempMax = data[i].temp.max;
-    let fhumidity = data[i].humidity;
-
-    $('#f-date').text = (unixDate[i]);
-    $('#f-icon').src = fIcon[i];
-    $('#f-tempMin').text = ('min temp: ' + ftempMin[i]);
-    $('f-tempMax').text = ('Max Temp: ' + ftempMax[i]);
-    $('f-humidity').text = ('Humidity: ' + fhumidity[i]);
-
-};
-
-
+//create the cards to hold the forecast data
 
 function createCard() {
 
-    const fCard = $("<div>").attr({ "class": "card" });
+    let tempNode = document.createTextNode("")
 
-    $(initCard).append(createCard());
+    const fCard = document.createElement('div');
+    fCard.newClass = ("card");
+    initCard.appendChild(fCard);
 
-    const fCardBody = $("<div>").attr({ "class": "card-body" });
-    $(fCard).append(fCardBody);
-    const fCardTitle = $("<div>").attr({ "class": "card-title" });
-    $(fCardBody).append(fCardTitle);
-    const fCardSTitle = $("<div>").attr({ "class": "card-subtitle mb-2 text-muted" });
-    $(fCardTitle).append(fCardSTitle);
-    const Icon = $("<img>").attr('src', "");
-    $(fCardSTitle).append(Icon);
-    const fCardText = $("<div>").attr({ "class": "card-text" });
-    $(fCardSTitle).append(fCardText);
-    const fcardLGrp = $("<ul>").attr({ "class": "card-group" });
-    $(fCardText).append(fcardLGrp);
-    let fCardLItm = $('<li>').attr({ "class": "card-item" });
-    $(fcardLGrp).append(fCardLItm);
-    let fCardLItm1 = $('<li>').attr({ "class": "card-item" });
-    $(fcardLGrp).append(fCardLItm1);
-    let fCardLItm2 = $('<li>').attr({ "class": "card-item" });
-    $(fcardLGrp).append(fCardLItm2);
+    const fCardBody = document.createElement('div');
+    fCardBody.newClass = ("card-body");
+    fCard.appendChild(fCardBody);
+
+    const fCardTitle = document.createElement('div');
+    fCardTitle.newClass = ("card-title");
+    fCardTitle.appendChild(tempNode);
+    fCardBody.appendChild(fCardTitle);
+
+    const fCardSubTitle = document.createElement('div');
+    fCardSubTitle.newClass = ("card-subtitle mb-2 text-muted");
+    fCardSubTitle.appendChild(tempNode);
+    fCardBody.appendChild(fCardTitle);
+
+    const fCardText = document.createElement('div');
+    fCardText.newClass = ('card-text');
+    fCardBody.appendChild(fCardText);
+
+    const fCardList = document.createElement('ul');
+    fCardList.newClass = ('list-group');
+    fCardText.appendChild(fCardList);
+
+
+    for (i = 0; i < 3; i++) {
+
+        const fCardItem = document.createElement('li');
+        fCardItem.newClass = ('list-group-item');
+        fCardItem.appendChild(tempNode);
+        fCardList.appendChild(fCardItem);
+    }
 
 }
 
 
 
+let forecastCards = function (response, unixDate) {
+    console.log(response);
+    console.log(unixDate);
+    let iconCode = response.daily[i].weather[0].icon;
+    console.log(iconCode);
+    let fIcon = iconURLBase + iconCode + ".png";
+    console.log(fIcon);
+    let ftempMin = response.daily[i].temp.day;
+    let ftempMax = response.daily[i].temp.max;
+    let fhumidity = response.daily[i].humidity;
+    console.log('min= ' + ftempMin, 'max= ' + ftempMax, 'hum= ' + fhumidity)
+    fDateEl.innerHTML = moment.unix(unixDate).format("MM/DD/YYYY");
+    fIconEl.src = fIcon;
+    fTempMinEl.innerHTML = ('Minimum Forecast Temperature: ' + ftempMin);
+    fTempMaxEl.innerHTML = ('Maximum Forecast Temperature: ' + ftempMax);
+    fhumidEl.innerHTML = ('Expected Humidity: ' + fhumidity);
+};
 
-/*for (let i = 0; i < 5; i++) {
-    createCard();
-    $(initCard).append(createCard());
-    //forecastCards();
-}*/
 
 
 
