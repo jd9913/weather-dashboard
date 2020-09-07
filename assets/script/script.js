@@ -11,6 +11,7 @@ const searchBoxEl = document.querySelector('#search-box');
 const searchFormEl = document.querySelector('#search-form');
 const cityNameEl = document.querySelector('#location');
 
+
 //current weather display elements
 const writeCityEl = document.querySelector('#w-city');//search-term
 const writeIconEl = document.querySelector('#w-icon');
@@ -35,7 +36,6 @@ const fhumidEl = document.querySelector('#f-humidity');*/
 
 
 
-
 let i = 0;
 
 
@@ -55,6 +55,7 @@ let searchFormSubmit = function (event) {
         return;
     }
 };
+
 //api call for getting weather data
 let getWeatherData = function (cityName) {
 
@@ -139,10 +140,7 @@ let displayWeather = function (response) {
     writeWindEl.innerHTML = ('Current Wind Speed: ' + response.current.wind_speed + ' MPH');
 
     writeUVIndexEl.innerHTML = response.current.uvi;
-
-
 }
-
 
 
 let colorUvi = function (response) {
@@ -168,11 +166,8 @@ let colorUvi = function (response) {
 
     //console.dir(writeUVIndexEl);
 
-
-
     // console.log(writeUVIndexEl);
-
-}
+ }
 
 
 //create the cards to hold the forecast data
@@ -233,17 +228,10 @@ function displayForecast(response, fDate) {
         let fhumid = $('<li>').attr('class', 'list-group-item').text('Humidity: ' + fhumidity + '%');
         fCardList.append(fhumid);
 
-
-
-
-
-
-
-    }
+   }
 
 
 };
-
 
 
 
@@ -252,4 +240,6 @@ $('#search-btn').on('click', function () {
     event.preventDefault();
     searchFormSubmit();
 });
+
+
 
